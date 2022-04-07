@@ -10,6 +10,7 @@
           <!-- <NuxtLink v-if="post.id" :to="post.id" class="button--grey"> -->
           <!-- <b>{{ post.Name }}</b> -->
           <!-- </NuxtLink> -->
+          <NotionRenderer v-if="typeof pages[post.id]==='object'" :blockMap="pages[post.id]" fullPage  prism katex todo />
         </li>
       </ul>
     </div>
@@ -17,12 +18,16 @@
 </template>
 
 <script>
-import { NotionRenderer, DatabaseItemsAdaptor, queryDatabase } from "@/entry";
+import {
+  NotionRenderer,
+  DatabaseItemsAdaptor,
+  queryDatabase,
+  getPageBlocks,
+} from "@/entry";
 
 import "prismjs";
 import "prismjs/themes/prism.css";
 import "katex/dist/katex.min.css";
-import { getPageTable } from "../src/lib/api";
 
 export default {
   name: "ServeDev",
@@ -30,7 +35,7 @@ export default {
     NotionRenderer,
   },
   data() {
-    return { blockMap: null, posts: null };
+    return { blockMap: null, posts: null, pages: {} };
   },
   methods: {
     async GetData() {
@@ -50,6 +55,12 @@ export default {
       await queryDatabase("6c12515ae1d64423839e4540cacf49a5")
     );
     this.posts = pageTable.filter((page) => page.Published);
+    this.posts.forEach((element) => {
+      getPageBlocks(element.id).then((ans) => {
+        console.log(ans);
+        this.pages[element.id] = ans;
+      });
+    });
   },
 };
 </script>

@@ -28,10 +28,11 @@ export function DatabaseItemsAdaptor(listObject) {
     return [];
   }
   return listObject.results.map(value => {
+    let idReg = new RegExp("-", "g");
     let page = {
       created_time: value.created_time,
       last_edited_time: value.last_edited_time,
-      id: value.id
+      id: value.id.replace(idReg, "")
     };
     for (const key in value.properties) {
       if (Object.hasOwnProperty.call(value.properties, key)) {
@@ -54,7 +55,7 @@ export function DatabaseItemsAdaptor(listObject) {
             text += title.plain_text;
           }
           page[key] = text;
-          page.id = newId;
+          page.id = newId.replace(idReg, "");
         } else {
           page[key] = "❌currently unsupport " + element.type;
         }
