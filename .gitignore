@@ -1,3 +1,4 @@
+src\config.js
 yarn.lock
 
 # Created by https://www.toptal.com/developers/gitignore/api/yarn,Vuejs,Vue,Node,macOS
@@ -8,9 +9,9 @@ yarn.lock
 .DS_Store
 .AppleDouble
 .LSOverride
-
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
