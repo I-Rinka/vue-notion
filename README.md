@@ -209,3 +209,19 @@ Please, feel free to [open an issue](https://github.com/janniks/vue-notion/issue
 ## License ⚖️
 
 MIT © [Jannik Siebert](https://twitter.com/jnnksbrt)
+
+## Modificaztion
+
+I modified this repository to meet my need:
+
+- [] using official api
+
+- [] query link in database
+
+In order to achieve that, I use CORS Anywhere and modified official notionhq's source code.
+
+node_modules\@notionhq\client\build\src\Client.js:
+
+Added base url as the proxy.
+
+@line291: added "Origin": 'https://api.notion.com/'

@@ -1,16 +1,29 @@
 import { config } from "@/config.js";
+
+const { Client } = require("@notionhq/client");
+
+const notion = new Client({
+  auth: config.NOTION_KEY,
+  baseUrl: config.NOTION_PROXY + "https://api.notion.com"
+});
+
 export const getDatabase = async (databaseId, apiUrl = config.NOTION_API) => {
+  (async () => {
+    const response = await notion.databases.query({
+      database_id: databaseId
+    });
+    console.log(response);
+  })();
+
   const myHeaders = new Headers();
-  myHeaders.append("Origin","https://api.notion.com/");
+  myHeaders.append("Origin", config.NOTION_API);
   myHeaders.append("authorization", "Bearer " + config.NOTION_KEY);
   myHeaders.append("Notion-Version", config.NOTION_API_VERSION);
-  return await fetch(
-    `${apiUrl}databases/${databaseId}`,
-    {
-      headers: myHeaders,
-    }
-  ).then(res => res.json());
+  return await fetch(config.NOTION_PROXY + `${apiUrl}databases/${databaseId}`, {
+    headers: myHeaders
+  }).then(res => res.json());
 };
+
 /*  await fetch(`${apiUrl}/databases/${}`,
     {
       headers: new Headers(
