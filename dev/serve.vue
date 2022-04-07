@@ -10,7 +10,7 @@
           <!-- <NuxtLink v-if="post.id" :to="post.id" class="button--grey"> -->
           <!-- <b>{{ post.Name }}</b> -->
           <!-- </NuxtLink> -->
-          <NotionRenderer v-if="typeof pages[post.id]==='object'" :blockMap="pages[post.id]" fullPage  prism katex todo />
+          <NotionRenderer :blockMap="pages[post.id]" prism katex todo />
         </li>
       </ul>
     </div>
@@ -58,7 +58,7 @@ export default {
     this.posts.forEach((element) => {
       getPageBlocks(element.id).then((ans) => {
         console.log(ans);
-        this.pages[element.id] = ans;
+        this.$set(this.pages,element.id,ans);
       });
     });
   },
