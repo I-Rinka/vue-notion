@@ -27,6 +27,7 @@ export default {
     const page = pageTable.find(
       (item) => item.published && item.slug === params.slug
     );
+    console.log("page",page);
     const blockMap = await $notion.getPageBlocks(page ? page.id : params.slug);
     if (!blockMap || blockMap.error) {
       return error({ statusCode: 404, message: "Post not found" });

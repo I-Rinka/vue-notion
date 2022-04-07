@@ -6,15 +6,13 @@
         <h2>All Posts</h2>
         <ul>
           <li v-for="(post, k) in posts" :key="k">
-            <b>{{ post.date }}</b>
-            <NuxtLink v-if="post.slug" :to="post.slug" class="button--grey">
-              <b>{{ post.title }}</b>
-              {{ post.preview }}
+            <NuxtLink v-if="post.id" :to="post.id" class="button--grey">
+              <b>{{ post.Name }}</b>
             </NuxtLink>
           </li>
         </ul>
       </div>
-      <div class="posts">
+      <!-- <div class="posts">
         <h2>All Tags</h2>
         <ul>
           <li v-for="(tag, k) in tags" :key="k">
@@ -29,7 +27,7 @@
             </ul>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -37,15 +35,17 @@
 <script>
 export default {
   async asyncData({ $notion, params, error }) {
-    const pageTable = await $notion.getPageTable("10327f9074b7433aad577ccd0020e971");
+    const pageTable = await $notion.getPageTable(
+      "6c12515ae1d64423839e4540cacf49a5"
+    );
 
     // sort published pages
     const posts = pageTable
-      .filter((page) => page.published)
-      .sort((a, b) => a.date - b.date);
-
+      .filter((page) => page.Published)
+    console.log(posts)
     // convert array of pages to a map of tags with page arrays
-    const postsByTag = pageTable
+    /*
+  const postsByTag = pageTable
       .filter((page) => page.published)
       .reduce((map, currentPage) => {
         currentPage.tags.forEach((tag) =>
@@ -55,11 +55,11 @@ export default {
         );
         return map;
       }, new Map());
-
+*/
     return {
       posts,
-      postsByTag,
-      tags: [...postsByTag.keys()].sort(),
+      // postsByTag,
+      // tags: [...postsByTag.keys()].sort(),
     };
   },
 };
