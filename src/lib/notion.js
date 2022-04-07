@@ -1,15 +1,13 @@
 import { config } from "@/config.js";
-
 export const getDatabase = async (databaseId, apiUrl = config.NOTION_API) => {
-  console.log("api", apiUrl);
   const myHeaders = new Headers();
+  myHeaders.append("Origin","https://api.notion.com/");
   myHeaders.append("authorization", "Bearer " + config.NOTION_KEY);
   myHeaders.append("Notion-Version", config.NOTION_API_VERSION);
   return await fetch(
     `${apiUrl}databases/${databaseId}`,
     {
       headers: myHeaders,
-      mode: "no-cors"
     }
   ).then(res => res.json());
 };

@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "@notionhq/client": "^1.0.4",
+    "axios": "^0.26.1",
+    "cors-anywhere": "^0.4.4",
     "cross-fetch": "^3.0.6",
     "defu": "^5.0.0",
     "vue-fragment": "^1.5.1",
