@@ -4,10 +4,11 @@ const { Client } = require("@notionhq/client");
 
 const notion = new Client({
   auth: config.NOTION_KEY,
-  baseUrl: config.NOTION_PROXY + "https://api.notion.com"
+  baseUrl: config.NOTION_PROXY +'/'+ config.NOTION_HOST
 });
 
-export const queryDatabase = async (databaseId, apiUrl = config.NOTION_API) => {
+export const queryDatabase = async (databaseId) => {
+
   return await notion.databases.query({
     database_id: databaseId
   });

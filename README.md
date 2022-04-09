@@ -225,3 +225,5 @@ node_modules\@notionhq\client\build\src\Client.js:
 Added base url as the proxy.
 
 @line291: added "Origin": 'https://api.notion.com/'
+
+"x-requested-with": "XMLHttpRequest"

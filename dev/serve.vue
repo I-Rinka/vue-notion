@@ -6,7 +6,7 @@
       <h2>All Posts</h2>
       <ul>
         <li v-for="(post, k) in posts" :key="k">
-          <div>{{ post }}</div>
+          <h1>{{ post.Name }}</h1>
           <!-- <NuxtLink v-if="post.id" :to="post.id" class="button--grey"> -->
           <!-- <b>{{ post.Name }}</b> -->
           <!-- </NuxtLink> -->
